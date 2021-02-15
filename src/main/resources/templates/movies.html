@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<header class="header" th:insert="fragments :: heading"></header>
+<div class="content-wrapper">
+    <div class="content">
+        <h1 th:text="#{navigation.movies}"></h1>
+        <h2 th:if="${director}" th:text="${director.directorFirstName} + ' ' + ${director.directorLastName}"
+            th:object="${director}"></h2>
+        <ul th:each="movie: ${movies}" th:object="${movie}">
+            <li>
+                <a th:text="*{movieName} + ', ' + #{movie.releaseYear} + ' ' + *{releaseYear}"
+                   th:href="'/movie/' + *{movieId}"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+<footer class="footer" th:insert="fragments :: languages"></footer>
+</body>
+</html>

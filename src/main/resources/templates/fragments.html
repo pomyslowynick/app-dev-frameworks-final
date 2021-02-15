@@ -1,0 +1,30 @@
+<div class="header" th:fragment="heading" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+     xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="container">
+        <h1 th:text="#{heading.welcome}"></h1>
+        <div class="break"></div>
+        <nav id="navbar">
+            <a class="btn btn-primary" th:href="@{~/directors}" th:text="#{navigation.directors}"></a>
+            <a class="btn btn-primary" th:href="@{~/movies}" th:text="#{navigation.movies}"></a>
+            <a class="btn btn-primary" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" th:href="@{~/newmovie}" th:text="#{navigation.newMovie}"></a>
+            <a class="btn btn-primary" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" th:href="@{~/updatemoviename}" th:text="#{navigation.editMovieName}"></a>
+            <a class="btn btn-primary" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" th:href="@{~/newdirector}" th:text="#{navigation.newDirector}"></a>
+            <a class="btn btn-primary" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{~/deletedirector}" th:text="#{navigation.deleteDirector}"></a>
+            <a class="btn btn-primary" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{~/deletemovie}" th:text="#{navigation.deleteMovie}"></a>
+            <a class="btn btn-danger" sec:authorize="!isAuthenticated()" th:href="@{~/my_login}" th:text="#{navigation.login}"></a>
+            <a class="btn btn-danger" sec:authorize="isAuthenticated()" th:href="@{/my_logout}" th:text="#{navigation.logout}"></a>
+            <a class="btn btn-danger" sec:authorize="!isAuthenticated()" th:href="@{/register}" th:text="#{navigation.register}"></a>
+
+        </nav>
+    </div>
+</div>
+<div class="footer" th:fragment="languages">
+    <div class="container" th:with="currentUrl=(${@thymeleafBeans.removeLangFromUrl()})">
+        <div class="content-wrapper"><a class="btn btn-primary" th:href="@{${currentUrl}(lang=ie)}">English</a>
+            <a class="btn btn-primary" th:href="@{${currentUrl}(lang=fr)}">French</a>
+        </div>
+        <div>
+            <span>Rafal Rosa TM</span>
+        </div>
+    </div>
+</div>

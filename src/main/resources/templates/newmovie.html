@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Movie</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="fragments :: heading"></header>
+<div class="content-wrapper">
+    <div class="content">
+        <form method="post" th:action="@{/newmovie}" th:object="${newMovieForm}">
+            <label for="movieName" th:text="#{newMovie.movieName}"></label>
+            <input type="text" th:field="*{newMovieName}">
+            <div th:if="${#fields.hasErrors('newMovieName')}" class="error" th:errors="*{newMovieName}"></div>
+            <div th:if="${duplicateMovieName}" class="error">
+                <span th:text="${duplicateMovieName} + ' ' + #{newMovie.alreadyExists} + ' for ' + ${duplicateDirector}"></span>
+            </div>
+
+
+            <label for="releaseYear" th:text="#{newMovie.releaseYear}"></label>
+            <input type="number" th:field="*{newMovieReleaseYear}">
+            <div th:if="${incorrectYear}" class="error">
+                <span th:text="'Release year has to be between 1888 and ' + ${currentYear}"></span>
+            </div>
+
+            <label for="director" th:text="#{newMovie.director}"></label>
+            <select th:field="*{directorId}">
+                <option th:each="director: ${directors}"
+                        th:text="${director.directorFirstName} + ' ' + ${director.directorLastName}"
+                        th:value="${director.directorId}"></option>
+            </select>
+            <input type="submit" th:value="#{submit}">
+        </form>
+    </div>
+</div>
+<footer class="footer" th:insert="fragments :: languages"></footer>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+    <meta charset="UTF-8">
+    <title>Movie Page</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<header class="header" th:insert="fragments :: heading"></header>
+<div class="content-wrapper">
+    <div class="content">
+        <h2 th:text="#{movie.movieName} + ': ' + ${movie.movieName}" th:object="${movie}"></h2>
+        <h2 th:text="#{movie.releaseYear} + ': ' + ${movie.releaseYear}" th:object="${movie}"></h2>
+    </div>
+</div>
+<footer class="footer" th:insert="fragments :: languages"></footer>
+</body>
+</html>

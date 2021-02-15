@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <meta charset="UTF-8">
+    <title>Directors Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+</head>
+<body>
+<header th:insert="fragments :: heading"></header>
+<div class="content-wrapper">
+    <div class="content">
+        <h1 th:text="#{navigation.directors}"></h1>
+        <ul th:each="director: ${directors}" th:object="${director}">
+            <li>
+                <a th:href="'/movies/' + *{directorId}"
+                   th:text="*{directorFirstName} + ' ' + *{directorLastName}"></a>
+            </li>
+        </ul>
+    </div>
+</div>
+<footer class="footer" th:insert="fragments :: languages"></footer>
+</body>
+</html>

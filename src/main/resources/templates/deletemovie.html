@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Movie</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="fragments :: heading"></header>
+<div class="content-wrapper">
+    <div class="content">
+        <form method="post" th:action="@{/deletemovie}" th:object   ="${deleteMovieForm}">
+            <label for="movieList" th:text="#{delete.movie}"></label>
+            <select th:field="*{movieId}">
+                <option th:each="movie: ${allMovies}"
+                        th:text="${movie.movieName} + ', ' + ${movie.releaseYear}"
+                        th:value="${movie.movieId}"></option>
+            </select>
+            <input type="submit" th:value="#{submit}">
+        </form>
+    </div>
+</div>
+<footer class="footer" th:insert="fragments :: languages"></footer>
+</body>
+</html>

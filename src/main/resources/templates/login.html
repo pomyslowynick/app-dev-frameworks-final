@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="fragments :: heading"></header>
+<div class="content-wrapper">
+    <div class="content">
+        <h1 th:text="#{login.login}"></h1>
+        <p th:if="${loginError}" class="error" th:text="#{login.error}"></p>
+        <form method="post" th:action="@{/my_login}">
+        <label for="username" th:text="#{login.username}"></label>
+        <input type="text" name="username">
+        <label for="password" th:text="#{login.password}"></label>
+        <input type="password" name="password">
+        <input type="submit" th:value="#{submit}">
+        </form>
+    </div>
+</div>
+<footer class="footer" th:insert="fragments :: languages"></footer>
+</body>
+</html>

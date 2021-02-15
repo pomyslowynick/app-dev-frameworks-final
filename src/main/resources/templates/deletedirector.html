@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Director</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="fragments :: heading"></header>
+<div class="content-wrapper">
+    <div class="content">
+        <form method="post" th:action="@{/deletedirector}" th:object="${deleteDirectorForm}">
+            <label for="directorList" th:text="#{delete.director}"></label>
+            <select th:field="*{directorId}">
+                <option th:each="director: ${allDirectors}"
+                        th:text="${director.directorFirstName} + ' ' + ${director.directorLastName}"
+                        th:value="${director.directorId}"></option>
+            </select>
+            <input type="submit" th:value="#{submit}">
+        </form>
+    </div>
+</div>
+<footer class="footer" th:insert="fragments :: languages"></footer>
+</body>
+</html>
